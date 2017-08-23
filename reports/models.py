@@ -84,7 +84,9 @@ class Incident(models.Model):
 
     @property
     def tweet_text(self):
-        location = self.location
+        location = "N/A"
+        if self.location is not None:
+            location = self.location
         if self.station is not None:
             location = str(self.station.name)
 
