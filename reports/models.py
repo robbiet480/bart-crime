@@ -101,7 +101,7 @@ class Incident(models.Model):
                     base_text = "{} at ({}) - {}".format(self.title, abbr,
                                                          incident_date)
                 # If no station, remove date
-                else if location is not None:
+                elif location is not None:
                     base_text = "{} at ({})".format(self.title, location)
                 else:
                     base_text = "{} - {}".format(self.title, incident_date)
