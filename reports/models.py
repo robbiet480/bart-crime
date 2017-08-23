@@ -84,7 +84,7 @@ class Incident(models.Model):
 
     @property
     def tweet_text(self):
-        location = "N/A"
+        location = None
         if self.location is not None:
             location = self.location
         if self.station is not None:
@@ -101,8 +101,10 @@ class Incident(models.Model):
                     base_text = "{} at ({}) - {}".format(self.title, abbr,
                                                          incident_date)
                 # If no station, remove date
+                else if location is not None:
+                    base_text = "{} at ({})".format(self.title, location)
                 else:
-                    base_text = "{} at ({})".format(self.title, abbr)
+                    base_text = "{} - {}".format(self.title, incident_date)
 
         return base_text
 
