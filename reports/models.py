@@ -238,7 +238,7 @@ def fill_data(sender, instance, **kwargs):  # pylint: disable=unused-argument
         case_id_matches = re.search(r'(\d{4}-\d{4})(?:\W+)?([SL]\d{0,2})?',
                                  instance.body)
         if case_id_matches is not None:
-            instance.case_id = case_id_matches.group(1)
+            instance.case = case_id_matches.group(1)
             instance.location_id = case_id_matches.group(2)
             instance.parsed_case = True
 
