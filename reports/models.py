@@ -226,6 +226,13 @@ class Incident(models.Model):
 
 @receiver(pre_save, sender=Incident)
 def fill_data(sender, instance, **kwargs):  # pylint: disable=unused-argument
+
+    if instance.parsed_location is False:
+        title_matches = re.search(r"(.*)-(.* Station)", instance.title)
+        if title_matches is not None:
+            instance.title = title_matches.group(1)
+            instance.location = title_matches.group(2)
+
     guessed_station = instance.station_best_guess
     if guessed_station is not None:
         instance.parsed_location = True
