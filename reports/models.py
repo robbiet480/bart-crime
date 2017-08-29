@@ -93,7 +93,12 @@ class Incident(models.Model):
         incident_date = self.incident_dt.strftime(HUMAN_TIME)
 
         base_text = "{} at {} - {}".format(self.title, location, incident_date)
-        if len(base_text) > 120:  # Max tweet length is 140 - 20 for URL
+
+        if location is None:
+            base_text = "{} - {}".format(self.title, incident_date)
+
+        # Max tweet length is 140 - 20 for URL
+        if location is not None and len(base_text) > 120:
             if len(base_text) - (len(location) - 6) <= 120:
                 # If we have station, use abbr instead of name
                 if self.station is not None:
