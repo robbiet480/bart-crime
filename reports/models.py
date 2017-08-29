@@ -234,6 +234,14 @@ def fill_data(sender, instance, **kwargs):  # pylint: disable=unused-argument
             instance.title = title_matches.group(1)
             instance.location = title_matches.group(2)
 
+    if instance.parsed_case is False:
+        body_matches = re.search(r'(\d{4}-\d{4})(?:\W+)?([SL]\d{0,2})?',
+                                 instance.body)
+        if body_matches is not None:
+            instance.case_id = case_id_matches.group(1)
+            instance.location_id = case_id_matches.group(2)
+            instance.parsed_case = True
+
     guessed_station = instance.station_best_guess
     if guessed_station is not None:
         instance.parsed_location = True
