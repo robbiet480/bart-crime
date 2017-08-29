@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 import difflib
 import pytz
+import re
 
 from django.contrib.auth.models import User
 from django.db import models
